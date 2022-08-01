@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Converter</title>
+    <style>
+        body{
+            height: 100vh;
+            width: 100vw;
+            display: grid;
+            place-items: center;
+        }
+        form{
+            /* border: 2px solid black; */
+            padding: 4rem 12rem 8rem 12rem;
+            border-radius: 2rem;
+            box-shadow: 0rem 0rem 6rem 1rem black;
+            background-color: rgb(29, 192, 210);
+        }
+
+        label{
+            font-size: 2rem;
+        }
+        #temp{
+            margin: 2rem 0rem 0rem 10rem;
+            height: 1.5rem;
+            width: 6rem;
+            cursor: pointer;
+        }
+        #units{
+            height: 1.8rem;
+            cursor: pointer;
+        }
+        #submit{
+            margin: 2rem 0rem 0rem 14rem;
+            padding: 0.5rem 1.5rem;
+            border-radius: 2rem;
+            background-color: black;
+            color: white;
+            cursor: pointer;
+
+        }
+        .result{
+            margin: 4rem 0rem 0rem 10rem;
+            font-size: 2.5rem;
+
+        }
+    </style>
+</head>
+
+<body>
+    <form id="tempCalc" onsubmit="calculateTemp(); return false">
+        <label for="temp">Convert your Temperature to different Units</label><br>
+        <input type="number" name="temp" id="temp">
+        <select name="units" id="units">
+            <option value="cel">Celsius</option>
+            <option value="Fah">Farenhite</option>
+
+        </select><br>
+        <input type="submit" name="temp" id="submit"><br>
+        <div class="result"></div>
+    </form>
+
+</body>
+<script>
+    const calculateTemp = () =>{
+        let temp = document.getElementById('temp').value;
+        // console.log(temp);
+
+        let units = document.getElementById('units');
+        const unitsType = units.options[units.selectedIndex].value;
+        // console.log(unitsType);
+
+        const celToFah = (cel) =>{
+            let farenhite = Math.round((cel * 9/5) + 32);
+            return farenhite;
+        }
+
+        const fahToCel = (feh) =>{
+            let celsius = Math.round((feh - 32) * 5/9);
+            return celsius;
+        }
+        let result;
+
+        if(unitsType == 'cel'){
+            result = celToFah(temp);
+            document.querySelector('.result').innerHTML = `${result}°Farenhite`;
+        }else{
+            result = fahToCel(temp);
+            document.querySelector('.result').innerHTML = `${result}°Celsius`;
+        }
+
+    };
+</script>
+
+</html>
